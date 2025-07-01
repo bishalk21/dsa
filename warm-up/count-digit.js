@@ -5,6 +5,8 @@
 // 1. divide the number by 10 until it becomes 0
 // 2. count the number of times you divide by 10
 
+// to remove the last digit from a number, use the floor division operator (/) - Math.floor(n / 10)
+
 let num = 12345;
 
 function countDigits(n) {
