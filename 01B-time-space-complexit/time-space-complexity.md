@@ -13,14 +13,6 @@ Time complexity is a computational complexity that describes the amount of time 
 | O(n)                                                             | O(log n)                                                       |
 | for an array of size 100, linear search takes 100 steps (slower) | for an array of size 100, binary search takes 7 steps (faster) |
 
-## mathematical notation of binary search
-
-````js
-let array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-let target = 5;
-
-
-
 ## Big O Notation
 
 Big O notation is a mathematical notation used to describe the upper bound of an algorithm's time complexity. It provides a high-level understanding of the algorithm's performance by focusing on the most significant factors that affect its execution time, particularly as the input size grows.
@@ -28,7 +20,7 @@ Big O notation is a mathematical notation used to describe the upper bound of an
 ```js
 const array = [1, 2, 3, 4, 5];
 target = 3;
-````
+```
 
 |              | linear search | binary search |
 | ------------ | ------------- | ------------- |
