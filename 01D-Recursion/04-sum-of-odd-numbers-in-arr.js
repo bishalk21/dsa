@@ -1,17 +1,38 @@
 /**
  * Sum of all odd numbers in an array
+ * Write a function sumOfOddNumbers(n) that calculates the sum of all odd numbers in an array using recursion.
+ * Base Condition: stops recursion when n is less than 0.
+ * recursive case: checks if the last element is odd, adds it to the sum of the rest of the array.
+ * Example: sumOfOddNumbers([1, 2, 3, 4, 5]) should return 9 (1 + 3 + 5).
+ * Time Complexity: O(n) - linear time complexity as it makes n recursive calls.
+ * Space Complexity: O(n) - linear space complexity due to the call stack.
+ * Input: [1, 2, 3, 4, 5]
+ * Output: 9
+ *
+ * Algorithm:
+ * 1. Define a function sumOfOddNumbers that takes an integer n as input.
+ * 2. Check if n is less than 0 (base case). If true, return 0.
+ * 3. Check if the last element of the array is odd using a helper function isOdd.
+ * 4. If it is odd, add it to the result of the recursive call with n - 1.
+ * 5. If it is even, just return the result of the recursive call with n - 1.
+ * 6. Return the final sum of all odd numbers in the array.
  */
 
 let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 function sumOfOddNumbers(n) {
-  let isOdd = (num) => num % 2 !== 0;
+  // Helper function to check if a number is odd
+  //   let isOdd = (num) => num % 2 !== 0;
+  let isOdd = arr[n] % 2 !== 0; // Check if the last element is odd
   // Base condition: if the array is empty, return 0
-  if (n < 0) {
-    return 0;
-  }
+  //   if (n < 0) {
+  //     return 0;
+  //   }
+  if (n < 0) return 0; // Base case: if n is less than 0, stop recursion
 
   // Recursive case: if the last element is odd, add it to the sum of the rest of the array
-  return (isOdd(arr[n]) ? arr[n] : 0) + sumOfOddNumbers(n - 1);
+  //   return (isOdd(arr[n]) ? arr[n] : 0) + sumOfOddNumbers(n - 1);
+  return (isOdd ? arr[n] : 0) + sumOfOddNumbers(n - 1); // Add the odd number to the sum of the rest of the array
+  // If the last element is even, just return the sum of the rest of the array
 }
 
 /**
@@ -42,4 +63,5 @@ function sumOfOddNumbersForLoop() {
       sum = sum + arr[i]; // Add the odd number to the sum
     }
   }
+  return sum; // Return the total sum of odd numbers
 }
