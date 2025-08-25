@@ -10,7 +10,7 @@
  * after merging, num1.length = m + n = 6
  * num1 = [1, 2, 2, 3, 5, 6]
  *
- * Algorithm 1: Brute Force
+ * Algorithm 1: Brute Force  – Simple Concatenate + Sort
  * - put all elements of num2 into num1
  * - sort num1
  * time complexity: O((m+n)log(m+n))
@@ -40,6 +40,14 @@
  * space complexity: O(1) (in-place)
  *
  */
+
+// Algo 1
+var merge = function (nums1, m, nums2, n) {
+  for (let i = m; i < nums1.length; i++) {
+    nums1[i] = nums2[i - m];
+  }
+  nums1.sort((a, b) => a - b);
+};
 
 // Algo 2: Two Pointers
 function merge(nums1, m, nums2, n) {
