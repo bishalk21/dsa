@@ -81,11 +81,17 @@ MyLinkedList.prototype.addNodeAtTail = function (value) {
 MyLinkedList.prototype.addNodeAtIndex = function (index, value) {
   let newNode = new ListNode(value);
 
+  // corner case: if the index is out of bounds
+  if (index < 0 || index > this.size) {
+    return;
+  }
+
   // if the index is at 0 or the list is empty, add at head
   if (index === 0 || this.head === null) {
     this.addNodeAtHead(value);
     return;
   }
+
   // if the index is equal to the size, add at tail
   else if (index === this.size) {
     this.addNodeAtTail(value);
