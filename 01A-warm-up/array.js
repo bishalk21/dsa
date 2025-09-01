@@ -30,6 +30,9 @@ console.log(buffer); // ArrayBuffer { [Uint8Contents]: <ff ff 00 00 ff ff>, byte
 // write a function that searches for an element in an array and returns index,
 // if not found, returns -1
 
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
 const arr = [1, 2, 3, 4, 5];
 function searchElement(arr, x) {
   for (let i = 0; i < arr.length; i++) {

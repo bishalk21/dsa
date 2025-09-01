@@ -57,3 +57,20 @@ function FibonacciIterative(n) {
 
 console.log(FibonacciIterative(5)); // Output: 5
 console.log(FibonacciIterative(10)); // Output: 55
+
+// given an integer n, return an array containing the first n Fibonacci numbers, starting from 0.
+// Constraints
+// 1. 0 <= n <= 50
+// 2. if n <= 0, return []
+// 3. if n = 1, return [0]
+
+function generateFibonacci(n) {
+  if (n <= 0) return [];
+  if (n === 1) return [0];
+
+  let fibArray = [0, 1];
+  for (let i = 2; i < n; i++) {
+    fibArray[i] = fibArray[i - 1] + fibArray[i - 2];
+  }
+  return fibArray;
+}

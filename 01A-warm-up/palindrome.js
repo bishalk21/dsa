@@ -48,3 +48,42 @@ function isPalindrome(num) {
 console.log(isPalindrome(121)); // Output: true
 console.log(isPalindrome(123)); // Output: false
 console.log(isPalindrome(-121)); // Output: false
+
+function isIntegerPalindrome(x) {
+  // x = 121
+  if (x < 0) return false;
+  let reversed = 0;
+  let original = x; // original = 121
+
+  while (x > 0) {
+    let remainder = x % 10; // last digit // remainder = 1
+    reversed = reversed * 10 + remainder; // reversed = 0 * 10 + 1 = 1
+    x = Math.floor(x / 10); // remove last digit // x = 12
+  }
+  return reversed === original; // Check if reversed is equal to original // 1 === 121
+}
+
+/** 1 -> 121 > 0 
+      -> remainder = 1
+      -> reversed = 0 * 10 + 1 = 1
+      -> x = Math.floor(121 / 10) = 12
+  
+    2 -> 12 > 0
+      -> remainder = 2
+      -> reversed = 1 * 10 + 2 = 12
+      -> x = Math.floor(12 / 10) = 1
+
+    3 -> 1 > 0
+      -> remainder = 1
+      -> reversed = 12 * 10 + 1 = 121
+      -> x = Math.floor(1 / 10) = 0
+
+    4 -> 0 > 0
+      -> stops execution of block
+
+    5. checks if reversed is equal to original
+      -> reversed = 121
+      -> original = 121
+      -> reversed === original
+      -> true
+*/
