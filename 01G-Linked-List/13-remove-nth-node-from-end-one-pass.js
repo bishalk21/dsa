@@ -1,4 +1,4 @@
-/** Remove nth node from end of list
+/** Remove nth node from end - One Pass
  * https://leetcode.com/problems/remove-nth-node-from-end-of-list/
  *
  * Given the head of a linked list,
@@ -9,13 +9,13 @@
  * Input: head = [1,2,3,4,5], n = 2
  * Output: [1,2,3,5]
  *
- * Algorithm Approach: Two Pass Technique (Using Length Calculation)
+ * Algorithm Approach: One Pass Technique (Two Pointers)
  * - Use a dummy node (Sentinel) to simplify the removal process.
- * - Use two pass to traverse the list.
- *  - first pass: to calculate the length of the list.
- *  - second pass: to find the (length - n)th node or the previous node to the one we want to remove.
- * - calculate the length of the linked list.
- * - find the (length - n)th node from the start of the list as the previous node to the one we want to remove.
+ * - Use two pointers (first and second) to traverse the list.
+ * - Move the first pointer or fast pointer n steps ahead.
+ * - move second pointer or slow pointer to the head.
+ * - Move both pointers until the first pointer reaches the end of the list.
+ * - At this point, the second pointer will be at the (length - n)th node or the previous node to the one we want to remove.
  * - Adjust the pointers to skip the nth node from the end.
  * - Return the next of the dummy node as the new head of the modified list.
  * - Handle edge cases such as an empty list or removing the head node.
@@ -35,27 +35,21 @@ function removeNthFromEnd(head, n) {
   let sentinel = new ListNode(0);
   sentinel.next = head;
 
-  // Calculate the length of the linked list
-  let length = 0;
-  while (head) {
-    head = head.next;
-    length++;
+  // first pointer
+  let first = head;
+  // Move the first pointer n steps ahead
+  for (let i = 0; i < n; i++) {
+    first = first.next;
   }
+  // second pointer
+  let second = sentinel; // Pointer to the previous node
 
-  // Find the (length - n)th node from the start
-  let prevLen = length - n;
-  let prev = sentinel; // Pointer to the previous node
-  //   while (prevLen > 0) {
-  //     prev = prev.next;
-  //     prevLen--;
-  //   }
-
-  for (let i = 0; i < prevLen; i++) {
-    prev = prev.next;
+  // Move both pointers until the first pointer reaches the end of the list
+  while (first) {
+    first = first.next;
+    second = second.next;
   }
-
   // Remove the nth node from the end
-  prev.next = prev.next.next;
-
+  second.next = second.next.next;
   return sentinel.next;
 }
