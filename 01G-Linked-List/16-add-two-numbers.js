@@ -10,6 +10,19 @@
  * Input: l1 = [2,4,3], l2 = [5,6,4]
  * Output: [7,0,8]
  * Explanation: 342 + 465 = 807.
+ *
+ * Algorithm:
+ * 1. Initialize a dummy node to help with building the result list.
+ * 2. Initialize a carry variable to handle sums greater than 9.
+ * 3. Loop through both lists until both are null and there is no carry left.
+ *   a. Sum the values of the current nodes and the carry.
+ *   b. Update the carry for the next iteration.
+ *   c. Create a new node with the digit value (sum % 10) and append it to the result list.
+ *   d. Move to the next nodes in both lists.
+ * 4. Return the next node of the dummy node, which is the head of the new list.
+ * 5. Time Complexity: O(max(m, n)), where m and n are the lengths of the two lists
+ * 6. Space Complexity: O(max(m, n)), for the new list.
+ * 7. This solution handles cases where the lists are of different lengths and where there is a carry left after processing both lists.
  */
 
 function ListNode(val, next) {
