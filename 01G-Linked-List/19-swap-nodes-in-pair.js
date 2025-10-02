@@ -15,6 +15,16 @@
  * Input: head = [1]
  * Output: [1]
  *
+ * Algorithm:
+ * - create a dummy node to basically handle the head pointer change
+ * - point the dummy node to the head
+ * - create three pointers: prevNode, currentNode, nextNode
+ * - iterate while currentNode and nextNode are not null
+ *   - swap the nodes by changing the pointers
+ *   - reinitialize the pointers for the next iteration
+ * - return dummyNode.next
+ * - Time complexity: O(n)
+ * - Space complexity: O(1)
  */
 
 function ListNode(val, next) {
