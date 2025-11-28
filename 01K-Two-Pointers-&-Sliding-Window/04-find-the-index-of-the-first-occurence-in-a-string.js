@@ -20,7 +20,7 @@
  * Explanation: "leeto" did not occur in "leetcode", so we return -1.
  */
 
-/**
+/** Brute Force Approach - Sliding Window
  * Time Complexity: O((m - n + 1) * n) = O(m * n) = O(n^2) in the worst case,
  * where m is the length of haystack and n is the length of needle.
  *

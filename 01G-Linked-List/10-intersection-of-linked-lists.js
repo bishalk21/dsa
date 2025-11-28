@@ -8,7 +8,7 @@
  * - traverse the second linked list and check if any node is already present in the hash set.
  * - If a node is found in the hash set, return that node as the intersection point.
  * - Time Complexity: O(m + n) where m and n are the lengths of the two lists.
- * - Space Complexity: O(1)
+ * - Space Complexity: O(m), where m is the number of nodes in the first list.
  * - This approach is efficient in terms of time complexity but uses extra space for the hash set.
  * - This approach is straightforward and easy to implement.
  *
