@@ -23,3 +23,14 @@
  * @param {TreeNode} q
  * @return {boolean}
  */
+
+function isSameTree(p, q) {
+  // both nodes are null, they are the same
+  if (p === null && q === null) return true;
+  // one of the nodes is null, they are not the same
+  if (p === null || q === null) return false;
+  // values of the nodes are different, they are not the same
+  if (p.val !== q.val) return false;
+  // recursively check left and right subtrees
+  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+}
