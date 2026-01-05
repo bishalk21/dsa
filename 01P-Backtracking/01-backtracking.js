@@ -46,3 +46,10 @@
  * - Graph Coloring Problem
  * - Crossword Puzzle Solver
  */
+
+function backtrackingTemplate(params) {
+  const result = [];
+  function backtrack(choices, path) {}
+  backtrack(initialChoices, []);
+  return result;
+}
