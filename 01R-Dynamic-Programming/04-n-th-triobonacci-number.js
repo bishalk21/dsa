@@ -27,6 +27,16 @@
  *
  * @param {number} n
  * @return {number}
+ *
+ * Tn+3 = Tn + Tn+1 + Tn+2
+ * if n = 4, how is formula applied?
+ * T4 = T1 + T2 + T3
+ *
+ * Hint:
+ * - The problem has optimal substructure and overlapping subproblems,
+ *   which makes it suitable for dynamic programming.
+ * - We can use a bottom-up approach with tabulation (Iteration).
+ * - The time complexity of the approach is O(n), and the space complexity is O(n) for tabulation.
  */
 
 /** using DP - Bottom-Up Approach with Tabulation (Iteration)
