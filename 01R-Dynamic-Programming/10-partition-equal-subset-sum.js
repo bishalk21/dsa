@@ -30,12 +30,11 @@ function canPartition(nums) {
   if (sum % 2 !== 0) return false;
   // target sum for each subset is half of total sum
   // because we need two equal subsets
-  let target = sum / 2;
-  let n = nums.length;
+  sum = sum / 2;
 
   // we need 2d dp array to store results for each index and target sum
-  const dp = Array.from({ length: n + 1 }, () =>
-    new Array(target + 1).fill(false),
+  const dp = Array.from({ length: sum + 1 }, () =>
+    new Array(nums.length).fill(false),
   );
   /** if we use map or object for memoization
    * Time Complexity: O(n * target)
@@ -51,8 +50,8 @@ function canPartition(nums) {
     if (remSum === 0) return true;
     if (remSum < 0 || start >= n) return false;
     // check if result is already computed
-    if (dp[start][remSum] !== false) return dp[start][remSum];
-    // if (memo.has(`${start}-${remSum}`)) return memo.get(`${start}-${remSum}`); // alternative using Map
+    if (dp[remSum][start] !== false) return dp[remSum][start];
+    // if (memo.has(`${remSum}-${start}`)) return memo.get(`${remSum}-${start}`); // alternative using Map
     // let key = remSum + '-' + start; // alternative using object
     // if (key in memo) return memo[key]; // alternative using object
     // recursive case: include or exclude the current number
@@ -62,13 +61,13 @@ function canPartition(nums) {
 
     for (let i = start; i < n; i++) {
       if (fn(remSum - nums[i], i + 1)) {
-        return (dp[start][remSum] = true);
+        return (dp[remSum][start] = true);
       }
     }
-    return (dp[start][remSum] = false);
+    return (dp[remSum][start] = false);
     // memo[key] = include || exclude; // alternative using object
     // memo.set(`${start}-${remSum}`, include || exclude); // alternative using Map
     // return dp[start][remSum];
   };
-  return fn(target, 0);
+  return fn(sum, 0);
 }
