@@ -87,3 +87,45 @@ function isIntegerPalindrome(x) {
       -> reversed === original
       -> true
 */
+
+/** C# solution
+ * Algorithm:
+ * 1. Check if the input integer is negative. If it is, return false since negative numbers cannot be palindromes.
+ * 2. Initialize a variable to store the reversed number.
+ * 3. Use a while loop to reverse the digits of the integer.
+ * 4. In each iteration, extract the last digit of the integer using the modulus operator.
+ * 5. Append the extracted digit to the reversed number.
+ * 6. Remove the last digit from the original integer by performing integer division.
+ * 7. After the loop, compare the reversed number with the original integer.
+ * 8. Return true if they are equal, indicating that the integer is a palindrome;
+ */
+
+/** using System means we are using the System namespace
+ * in C#, namespaces are used to organize code and prevent naming conflicts
+ */
+// using System;
+
+/** define a class named Solution
+ * in C#, all code must be contained within a class
+ * public means the class is accessible from other classes
+ * class name is Solution
+ */
+// public class Solution {
+/**  define a method named IsPalindrome
+ * public means the method is accessible from other classes
+ * bool means the method returns a boolean value (true or false)
+ * IsPalindrome is the name of the method
+ * int x means the method takes an integer parameter named x
+ */
+//   public bool IsPalindrome(int x) {
+//     if (x < 0) return false;
+//     int reversed = 0;
+//     int original = x;
+//     while (x > 0) {
+//       int remainder = x % 10;
+//       reversed = reversed * 10 + remainder;
+//       x /= 10;
+//     }
+//     return reversed == original;
+//   }
+// }
