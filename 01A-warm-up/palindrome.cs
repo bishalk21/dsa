@@ -134,3 +134,22 @@ public class Solution
         return reversed == original;
     }
 }
+
+// c++ solution
+// class Solution {
+// public:
+//     bool isPalindrome(int x) {
+//         if (x < 0) return false; 
+//        // int reversed = 0;
+//         long reversed = 0; // to avoid signed integer overflow
+//         int original = x;
+//         while (x > 0) {
+//             int remainder = x % 10;
+//             signed integer overflow: 
+//             998765432 * 10 cannot be represented in type 'int'
+//             reversed = reversed * 10 + remainder;
+//             x /= 10;
+//         }
+//         return reversed == original;
+//     }
+// };
