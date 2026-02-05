@@ -36,6 +36,25 @@
  * @return {number}
  */
 
+/** Brute Force
+ * - find all subarrays of length >= 4
+ * - check if they are trionic arrays
+ * - calculate sum and update maxSum
+ *
+ * Time Complexity: O(n^3) - generating all subarrays and checking each
+ * Space Complexity: O(1) - no extra space used
+ */
+
+/** DP - Three States
+ * - Use three DP arrays to track sums of increasing and decreasing sequences
+ * - incLeft: max sum of strictly increasing subarray from left to right
+ * - dec: max sum of strictly decreasing subarray from left to right
+ * - incRight: max sum of strictly increasing subarray from right to left
+ * - Update maxSum whenever we find a valid trionic subarray
+ * Time Complexity: O(n) - single pass through the array
+ * Space Complexity: O(n) - additional space for dp arrays
+ */
+
 function maxTrionicArraySum(nums) {
   let n = nums.length;
   // initialize maxSum to the smallest possible value
@@ -96,3 +115,184 @@ function maxTrionicArraySum(nums) {
  * Time Complexity: O(n) - single pass through the array
  * Space Complexity: O(n) - additional space for dp arrays
  */
+
+/** DFS with States - Recursion
+ * - Use DFS to explore all subarrays starting from each index
+ * - Track the state of the trionic array (increasing, decreasing, etc.)
+ * - Calculate sum and update maxSum
+ *
+ * Time Complexity: O(n^2) - exploring subarrays from each index
+ * Space Complexity: O(n) - recursion stack
+ */
+
+function maxTrionicArraySum(nums) {
+  const n = nums.length;
+  const INF = Number.MIN_SAFE_INTEGER;
+
+  function dfs(i, state) {
+    if (i === n) {
+      return state === 3 ? 0 : INF;
+    }
+
+    let res = INF;
+
+    if (state === 0) {
+      if (i + 1 < n && nums[i] < nums[i + 1]) {
+        res = Math.max(res, nums[i] + dfs(i + 1, 1));
+      } else {
+        return INF;
+      }
+    }
+
+    if (state === 1) {
+      if (i + 1 < n && nums[i] < nums[i + 1])
+        res = Math.max(res, nums[i] + dfs(i + 1, 1));
+      if (i + 1 < n && nums[i] > nums[i + 1])
+        res = Math.max(res, nums[i] + dfs(i + 1, 2));
+    }
+
+    if (state === 2) {
+      if (i + 1 < n && nums[i] > nums[i + 1])
+        res = Math.max(res, nums[i] + dfs(i + 1, 2));
+      if (i + 1 < n && nums[i] < nums[i + 1])
+        res = Math.max(res, nums[i] + dfs(i + 1, 3));
+    }
+
+    if (state === 3) {
+      res = nums[i];
+      if (i + 1 < n && nums[i] < nums[i + 1])
+        res = Math.max(res, nums[i] + dfs(i + 1, 3));
+    }
+
+    return res;
+  }
+
+  let ans = INF;
+  for (let i = 0; i < n; i++) {
+    ans = Math.max(ans, dfs(i, 0));
+  }
+  return ans;
+}
+
+/** DFS with States - Memoization
+ * - Use DFS to explore all subarrays starting from each index
+ * - Track the state of the trionic array (increasing, decreasing, etc.)
+ * - Use memoization to store results of subproblems
+ * - Calculate sum and update maxSum
+ *
+ * Time Complexity: O(n^2) - exploring subarrays from each index with memoization
+ * Space Complexity: O(n) - recursion stack and memoization storage
+ */
+
+function maxTrionicArraySum(nums) {
+  const n = nums.length;
+  const INF = Number.MIN_SAFE_INTEGER;
+  const dp = Array.from({ length: n + 1 }, () => Array(4).fill(null));
+
+  function dfs(i, state) {
+    if (i === n) {
+      return state === 3 ? 0 : INF;
+    }
+
+    if (dp[i][state] !== null) return dp[i][state];
+
+    let res = INF;
+
+    if (state === 0) {
+      if (i + 1 < n && nums[i] < nums[i + 1]) {
+        res = Math.max(res, nums[i] + dfs(i + 1, 1));
+      } else {
+        return INF;
+      }
+    }
+
+    if (state === 1) {
+      if (i + 1 < n && nums[i] < nums[i + 1])
+        res = Math.max(res, nums[i] + dfs(i + 1, 1));
+      if (i + 1 < n && nums[i] > nums[i + 1])
+        res = Math.max(res, nums[i] + dfs(i + 1, 2));
+    }
+
+    if (state === 2) {
+      if (i + 1 < n && nums[i] > nums[i + 1])
+        res = Math.max(res, nums[i] + dfs(i + 1, 2));
+      if (i + 1 < n && nums[i] < nums[i + 1])
+        res = Math.max(res, nums[i] + dfs(i + 1, 3));
+    }
+
+    if (state === 3) {
+      res = nums[i];
+      if (i + 1 < n && nums[i] < nums[i + 1])
+        res = Math.max(res, nums[i] + dfs(i + 1, 3));
+    }
+
+    dp[i][state] = res;
+    return res;
+  }
+
+  let ans = INF;
+  for (let i = 0; i < n; i++) {
+    ans = Math.max(ans, dfs(i, 0));
+  }
+  return ans;
+}
+
+/** DP with States - Tabulation
+ * - Use DP to iteratively build solutions for subarrays
+ * - Track the state of the trionic array (increasing, decreasing, etc.)
+ * - Calculate sum and update maxSum
+ *
+ * Time Complexity: O(n) - single pass through the array
+ * Space Complexity: O(n) - additional space for dp table
+ */
+
+function maxTrionicArraySum(nums) {
+  const n = nums.length;
+  const INF = -1e18;
+
+  const dp = Array.from({ length: n + 1 }, () => Array(4).fill(INF));
+
+  // Base case
+  for (let state = 0; state < 4; state++) {
+    dp[n][state] = state === 3 ? 0 : INF;
+  }
+
+  for (let i = n - 1; i >= 0; i--) {
+    // State 0
+    dp[i][0] = INF;
+    if (i + 1 < n && nums[i] < nums[i + 1]) {
+      dp[i][0] = nums[i] + dp[i + 1][1];
+    }
+
+    // State 1
+    dp[i][1] = INF;
+    if (i + 1 < n && nums[i] < nums[i + 1]) {
+      dp[i][1] = Math.max(dp[i][1], nums[i] + dp[i + 1][1]);
+    }
+    if (i + 1 < n && nums[i] > nums[i + 1]) {
+      dp[i][1] = Math.max(dp[i][1], nums[i] + dp[i + 1][2]);
+    }
+
+    // State 2
+    dp[i][2] = INF;
+    if (i + 1 < n && nums[i] > nums[i + 1]) {
+      dp[i][2] = Math.max(dp[i][2], nums[i] + dp[i + 1][2]);
+    }
+    if (i + 1 < n && nums[i] < nums[i + 1]) {
+      dp[i][2] = Math.max(dp[i][2], nums[i] + dp[i + 1][3]);
+    }
+
+    // State 3
+    dp[i][3] = nums[i];
+    if (i + 1 < n && nums[i] < nums[i + 1]) {
+      dp[i][3] = Math.max(dp[i][3], nums[i] + dp[i + 1][3]);
+    }
+  }
+
+  let ans = INF;
+  for (let i = 0; i < n; i++) {
+    ans = Math.max(ans, dp[i][0]);
+  }
+
+  return ans;
+}
