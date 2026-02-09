@@ -13,6 +13,22 @@
  * Space Complexity: O(n + k) - requires additional space for the output array and the count array.
  *                   O(n) when k is O(n).
  *
+ * What is Stable Sort? or What is Stability in Sorting Algorithms?
+ * A stable sort maintains the relative order of records with equal keys (i.e., values).
+ * In other words, if two elements have the same value,
+ * they will appear in the same order in the sorted output as they appear in the input.
+ *
+ * How does Counting Sort achieve stability?
+ * Counting Sort achieves stability by processing the input array from right to left when building the output array.
+ * When placing elements into the output array, it uses the count array to determine the correct position for each element.
+ * To determine the position of an element,
+ * - maintains the prefix sum of the count array,
+ *   where each element in the count array is updated to be the sum of itself and all previous counts.
+ * - loops from the end of the input array to the beginning,
+ *   for each element, it uses the prefix sum of that element and
+ *   places element in prefix sum - 1 index of the output array, and
+ *   decrements the prefix sum for that element in the count array.
+ *
  * Sort Colors
  * https://leetcode.com/problems/sort-colors/
  * Given an array nums with n objects colored red, white, or blue,
@@ -40,6 +56,55 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 
+/** Algorithm: Counting Sort (Stable) */
+function countingSort(nums) {
+  // finding range of input values (k) to determine the size of the count array
+  // finding the range is like finding the maximum value in the input array, which is O(n) time complexity
+  // find the maximum value in the input array to determine the size of the count array
+  let max = Math.max(...nums);
+  // create a count array to store the count of each unique integer in the input array
+  // the size of the count array is max + 1 because we need to account for the integer 0 as well
+  let count = new Array(max + 1).fill(0);
+  // count the occurrences of each unique integer in the input array
+  for (let num of nums) {
+    count[num]++;
+  }
+  // prefix sum array to store the cumulative count of each unique integer in the input array
+  //   let prefixSum = new Array(count.length).fill(0);
+  // first element of prefix sum array is same as count array
+  //   prefixSum[0] = count[0];
+  // build the prefix sum array
+  for (let i = 1; i < count.length; i++) {
+    // prefixSum[i] = prefixSum[i - 1] + count[i];
+    count[i] = count[i - 1] + count[i];
+  }
+  // create an output array to store the sorted integers
+  let sortedArr = new Array(nums.length);
+  // iterate through the input array from right to left to maintain stability
+  for (let i = nums.length - 1; i >= 0; i--) {
+    let curr = nums[i];
+    // place the integer num in the correct position in the output array based on the prefix sum
+    // sortedArr[prefixSum[curr] - 1] = curr;
+    let x = count[curr] - 1; // calculate the index for the current integer in the output array
+    sortedArr[x] = curr; // place the current integer in the output array at the calculated index
+
+    // decrement the prefix sum for the integer num in the count array
+    count[curr]--;
+  }
+
+  // copy the sorted integers back to the original input array
+  // this step is necessary to modify the input array in-place as required by the problem statement
+  // we can also return the sorted array instead of copying it back to the original array
+  for (let i = 0; i < nums.length; i++) {
+    nums[i] = sortedArr[i];
+  }
+
+  return nums; // return the sorted array
+
+  //   return sortedArr; // return the sorted array
+}
+
+/** Algorithm: Counting Sort (Not Stable) */
 function countingSort(nums) {
   // finding range of input values (k) to determine the size of the count array
   // finding the range is like finding the maximum value in the input array, which is O(n) time complexity
