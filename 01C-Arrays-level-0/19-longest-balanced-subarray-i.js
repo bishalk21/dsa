@@ -55,6 +55,8 @@ function longestBalancedSubarray(nums) {
   let maxLength = 0;
   // try each starting point of the subarray
   for (let start = 0; start < n; start++) {
+    // early exit: if the remaining length of the array is less than or equal to maxLength, we can break the loop
+    if (n - start <= maxLength) break;
     // set to store distinct even and odd numbers in the current window
     let evenCount = new Set();
     let oddCount = new Set();
@@ -84,8 +86,44 @@ function longestBalancedSubarray(nums) {
        * start = 3, end = 3, num = 3, evenCount = {}, oddCount = {3}, maxLength = 4
        */
     }
-    evenCount.clear();
-    oddCount.clear();
+    // evenCount.clear();
+    // oddCount.clear();
+  }
+  return maxLength;
+}
+
+/** Longest Balanced Subarray II
+ * https://www.leetcode.com/problems/longest-balanced-subarray-ii/
+ *
+ * The problem is similar to Longest Balanced Subarray I,
+ * but we need to find the longest balanced subarray
+ * that contains at least one even number and at least one odd number.
+ * The approach is the same as Longest Balanced Subarray I,
+ * but we need to add an additional check to ensure that
+ * the balanced subarray contains at least one even and one odd number.
+ * Time Complexity: O(n)
+ * Space Complexity: O(n)
+ */
+
+function longestBalancedSubarrayII(nums) {
+  let n = nums.length;
+  let maxLength = 0;
+  for (let start = 0; start < n; start++) {
+    if (n - start <= maxLength) break;
+    let evenCount = new Set();
+    let oddCount = new Set();
+    for (let end = start; end < n; end++) {
+      let num = nums[end];
+      // add the current number to the appropriate set (even or odd)
+      (num & 1 ? oddCount : evenCount).add(num);
+      // check if balanced and contains at least one even and one odd number
+      if (evenCount.size === oddCount.size && evenCount.size > 0) {
+        let currentLength = end - start + 1;
+        maxLength = Math.max(maxLength, currentLength);
+      }
+    }
+    // evenCount.clear();
+    // oddCount.clear();
   }
   return maxLength;
 }
