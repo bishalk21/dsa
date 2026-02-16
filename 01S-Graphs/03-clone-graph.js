@@ -109,3 +109,71 @@ function cloneGraph(node) {
   // return visited.get(node);
   return cloneNode;
 }
+
+/** Depth First Search (DFS)  - Iterative
+ * - We can also use a depth-first search (DFS) approach to clone the graph.
+ * - Similar to BFS, we will maintain a stack to explore the graph and a map to keep track of visited nodes and their corresponding cloned nodes.
+ * - We will start DFS from the given node, create a clone of it, and add it to the visited map.
+ * - For each node we visit, we will iterate through its neighbors.
+ *   If a neighbor has not been visited (cloned) yet, we will create a clone of it,
+ *   add it to the visited map, and push it onto the stack for further exploration.
+ * - Finally, we will return the clone of the input node.
+ *
+ * Time Complexity: O(V + E),
+ *                 where V is the number of vertices (nodes) and E is the number of edges in the graph.
+ * Space Complexity: O(V),
+ *                 where V is the number of vertices (nodes) in the graph, due to the visited map and the stack.
+ */
+function cloneGraphDFSIterative(node) {
+  if (node === null) return null;
+  let stack = [node];
+  let visited = new Map();
+  let cloneNode = new Node(node.val);
+  visited.set(node, cloneNode);
+  while (stack.length) {
+    let currNode = stack.pop();
+    for (let neighbor of currNode.neighbors) {
+      if (!visited.has(neighbor)) {
+        stack.push(neighbor);
+        let cloneNeighbor = new Node(neighbor.val);
+        visited.set(neighbor, cloneNeighbor);
+      }
+      let cloneCurrNode = visited.get(currNode);
+      let cloneNeighbor = visited.get(neighbor);
+      cloneCurrNode.neighbors.push(cloneNeighbor);
+    }
+  }
+  return cloneNode;
+}
+
+/** Depth First Search (DFS) - Recursive
+ * - We can also use a depth-first search (DFS) approach with recursion to clone the graph.
+ * - Similar to the iterative DFS, we will maintain a map to keep track of visited nodes and their corresponding cloned nodes.
+ * - We will define a recursive function that takes a node as input.
+ *   If the node has not been visited (cloned) yet, we will create a clone of it,
+ *   add it to the visited map, and recursively call the function for each of its neighbors.
+ * - Finally, we will return the clone of the input node.
+ *
+ * Time Complexity: O(V + E),
+ *                where V is the number of vertices (nodes) and E is the number of edges in the graph.
+ * Space Complexity: O(V),
+ *               where V is the number of vertices (nodes) in the graph, due to the visited map and the recursive call stack.
+ */
+
+function cloneGraphDFSRecursive(node) {
+  if (node === null) return null;
+  let visited = new Map();
+  function dfs(currNode) {
+    if (!visited.has(currNode)) {
+      let cloneCurrNode = new Node(currNode.val);
+      visited.set(currNode, cloneCurrNode);
+      for (let neighbor of currNode.neighbors) {
+        dfs(neighbor);
+        let cloneNeighbor = visited.get(neighbor);
+        cloneCurrNode.neighbors.push(cloneNeighbor);
+      }
+    }
+  }
+  dfs(node);
+  return visited.get(node);
+}
