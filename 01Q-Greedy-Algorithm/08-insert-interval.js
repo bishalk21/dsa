@@ -29,6 +29,7 @@
  */
 
 /** Greedy Approach - insert interval
+ * - iterate through the list of intervals and add all non-overlapping intervals to the result list
  * Time Complexity: O(n), where n is the number of intervals
  * Space Complexity: O(n), where n is the number of intervals
  *
