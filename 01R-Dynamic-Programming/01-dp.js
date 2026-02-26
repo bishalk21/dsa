@@ -61,4 +61,18 @@
  *
  * Time Complexity: Varies based on the problem and approach (top-down or bottom-up).
  * Space Complexity: Varies based on the problem and approach (top-down or bottom-up).
+ *
+ * 1. Bottom-Up Approach (Tabulation/Iterative):
+ *   - We start from the smallest subproblems and iteratively build up to the solution of the main problem.
+ *   - We typically use an array or table to store the results of subproblems.
+ *   - base case is calculated by the first few entries in the table, and we fill the table iteratively until we reach the desired solution.
+ *   - Time Complexity: O(n) - linear time complexity as we compute each subproblem once.
+ *   - Space Complexity: O(n) - linear space complexity due to the storage of computed results.
+ *
+ * 2. Top-Down Approach (Memoization/Recursion):
+ *   - We start with the main problem and recursively break it down into smaller subproblems.
+ *   - We use a cache (often a hash map or array) to store the results of subproblems as we compute them.
+ *   - When we encounter a subproblem, we first check if its result is already in the cache. If it is, we return the cached result; otherwise, we compute it recursively and store the result in the cache before returning it.
+ *   - Time Complexity: O(n) - linear time complexity as we compute each subproblem once.
+ *   - Space Complexity: O(n) - linear space complexity due to the storage of computed results and the call stack for recursion.
  */
