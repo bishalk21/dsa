@@ -29,8 +29,9 @@
  * @return {number}
  */
 
-/**
- * To handle negative numbers, we need to keep track of both the maximum and minimum products up to the current position.
+/** Approach: Modified Kadane's Algorithm (Dynamic Programming)
+ * To handle negative numbers,
+ * we need to keep track of both the maximum and minimum products up to the current position.
  * This is because a negative number can turn a minimum product into a maximum product when multiplied.
  * At each step, we update the maximum and minimum products by considering the current number,
  * the product of the current number with the previous maximum product,
@@ -55,4 +56,40 @@ function maxProduct(nums) {
     totalMax = Math.max(totalMax, maxProd);
   }
   return totalMax;
+}
+
+/** Using two pointers
+ * We can also solve this problem using two pointers by traversing the array from both left-to-right and right-to-left.
+ * This approach is based on the observation that the maximum product subarray can be found by considering the products of elements from both directions.
+ * We maintain two variables, ltrProd and rtlProd, to keep track of the product of elements from left-to-right and right-to-left, respectively.
+ * As we traverse the array, we update these products and keep track of the maximum product found so far.
+ * If we encounter a zero, we reset the corresponding product to 1, as a zero would break the product sequence.
+ * This method ensures that we account for the effects of negative numbers and zeros, and it efficiently finds the maximum product subarray.
+ * The time complexity of this algorithm is O(n), where n is the length of the input array nums.
+ * The space complexity is O(1) since we are using a constant amount of extra space.
+ */
+function maxProduct(nums) {
+  let n = nums.length;
+  let ltrProd = 1;
+  let rtlProd = 1;
+  let maxProd = -Infinity;
+  // for (let i = 0; i < n; i++) {
+  //   ltrProd *= nums[i];
+  //   maxProd = Math.max(maxProd, ltrProd);
+  //   if (ltrProd === 0) ltrProd = 1;
+  // }
+  // for (let i = n - 1; i >= 0; i--) {
+  //   rtlProd *= nums[i];
+  //   maxProd = Math.max(maxProd, rtlProd);
+  //   if (rtlProd === 0) rtlProd = 1;
+  // }
+
+  for (let i = 0; i < n; i++) {
+    ltrProd *= nums[i];
+    rtlProd *= nums[n - 1 - i];
+    maxProd = Math.max(maxProd, ltrProd, rtlProd);
+    if (ltrProd === 0) ltrProd = 1;
+    if (rtlProd === 0) rtlProd = 1;
+  }
+  return maxProd;
 }
