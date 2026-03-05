@@ -5,7 +5,7 @@
  * It works by iteratively updating a distance matrix that represents the shortest path between
  * every pair of vertices in the graph.
  *
- * The algorithm initializes the distance matrix with the direct edge weights between vertices, and then
+ * The algorithm initializes the distance matrix with the direct edge weights between vertices,
  * iteratively updates the matrix by considering each vertex as an intermediate point in the path.
  * If the path through the intermediate vertex is shorter than the previously known path, the distance matrix is updated.
  *
