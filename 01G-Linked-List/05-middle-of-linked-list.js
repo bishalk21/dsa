@@ -1,4 +1,6 @@
 /** Middle of Linked List
+ * https://leetcode.com/problems/middle-of-the-linked-list/
+ *
  * Given the head of a singly linked list,
  * return the middle node of the linked list.
  * If there are two middle nodes, return the second middle node.
@@ -15,7 +17,7 @@
  * Time Complexity: O(n)
  * Space Complexity: O(n)
  *
- * Approach 2: slow and fast pointer
+ * Approach 2: slow and fast pointer (tortoise and hare algorithm)
  * - create two pointers, slow and fast
  * - initialize both pointers to the head of the linked list
  * - move the fast pointer two steps for every one step the slow pointer takes
@@ -36,12 +38,20 @@ class MyLinkedList {
     this.head = null;
     this.size = 0;
   }
+  findMiddle() {
+    let slow = this.head;
+    let fast = this.head;
+    while (fast && fast.next) {
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+    return slow;
+  }
 }
 
-MyLinkedList.prototype.getMiddle = function (head) {
-  let slow = head;
-  let fast = head;
-
+MyLinkedList.prototype.findMiddle = function () {
+  let slow = this.head;
+  let fast = this.head;
   //   while (fast !== null && fast.next !== null) {
   while (fast && fast.next) {
     slow = slow.next;
@@ -61,3 +71,12 @@ MyLinkedList.prototype.getMiddle = function (head) {
   let mid = Math.floor(arr.length / 2);
   return arr.slice(mid);
 };
+
+function getMiddle(head) {
+  let slow = (fast = head);
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  return slow;
+}

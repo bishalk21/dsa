@@ -69,4 +69,5 @@ MyLinkedList.prototype.deleteNodeAtIndex = function (index) {
     current = current.next;
   }
   current.next = current.next.next;
+  this.size--;
 };
