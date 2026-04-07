@@ -34,19 +34,15 @@ function ListNode(val, next) {
 
 function swapPairs(head) {
   if (!head || !head.next) return head;
-
   const dummyNode = new ListNode(0);
   dummyNode.next = head;
-
   let prevNode = dummyNode;
   let currentNode = head;
   let nextNode = head.next;
   while (currentNode && nextNode) {
-    // Swapping
     prevNode.next = nextNode;
     currentNode.next = nextNode.next;
     nextNode.next = currentNode;
-    // Reinitializing the pointers
     prevNode = currentNode;
     currentNode = prevNode.next;
     // nextNode = currentNode ? currentNode.next : null;

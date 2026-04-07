@@ -36,14 +36,13 @@
  * - If the character is a consonant, update the maximum consonant frequency if necessary
  * - Return the sum of the maximum vowel and consonant frequencies
  *
- * Time Complexity: O(n) where n is the length of the string
+ * Time Complexity: O(n) where n is the length of the string, as we need to iterate through the string to build the hash map and then iterate through the hash map to find the maximum frequencies
  * Space Complexity: O(1) as we are using a constant amount of space for the hash map (at most 26 characters)
  * as we are only dealing with lowercase English letters
  */
 
 function maxFreq(s) {
-  let strSet = {}; // { } is way to create a hash map in JS
-
+  let strSet = {};
   // Time complexity: O(n)
   for (let i = 0; i < s.length; i++) {
     if (!strSet[s[i]]) {
@@ -52,13 +51,11 @@ function maxFreq(s) {
       ++strSet[s[i]];
     }
   }
-
   let maxVowelFreq = 0;
   let maxConsonantFreq = 0;
   //   let vowels = ["a", "e", "i", "o", "u"];
   // optimized using set
   let vowels = new Set(["a", "e", "i", "o", "u"]);
-
   // Time complexity: O(n)
   for (let i = 0; i < s.length; i++) {
     // if (vowels.includes(s[i])) {
@@ -74,6 +71,14 @@ function maxFreq(s) {
       }
     }
   }
+
+  // for (const ch in freq) {
+  //   if (vowels.has(ch)) {
+  //     maxVowelFreq = Math.max(maxVowelFreq, freq[ch]);
+  //   } else {
+  //     maxConsonantFreq = Math.max(maxConsonantFreq, freq[ch]);
+  //   }
+  // }
   return maxVowelFreq + maxConsonantFreq;
 }
 
@@ -82,7 +87,6 @@ function maxFreq(s) {
 // Space Complexity: O(1)
 function maxFreqSol(s) {
   let strSet = {}; // { } is way to create a hash map in JS
-
   // Time complexity: O(n)
   for (let i = 0; i < s.length; i++) {
     // if (!strSet[s[i]]) {
@@ -90,15 +94,12 @@ function maxFreqSol(s) {
     // } else {
     //   ++strSet[s[i]];
     // }
-
     // optimized using ternary operator
     strSet[s[i]] = strSet[s[i]] ? strSet[s[i]] + 1 : 1;
   }
-
   let maxVowelFreq = 0;
   let maxConsonantFreq = 0;
   let vowels = new Set(["a", "e", "i", "o", "u"]);
-
   // Iterate through the keys of the hash map instead of the string
   // Object.keys() method returns an array of a given object's own enumerable property names
   let mapKeys = Object.keys(strSet);
@@ -108,7 +109,6 @@ function maxFreqSol(s) {
       //   if (strSet[mapKeys[i]] > maxVowelFreq) {
       //     maxVowelFreq = strSet[mapKeys[i]];
       //   }
-
       // optimized using Math.max()
       maxVowelFreq = Math.max(maxVowelFreq, strSet[mapKeys[i]]);
     } else {

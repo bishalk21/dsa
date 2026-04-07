@@ -26,7 +26,7 @@
  * Algorithm: without built-in functions
  * - Iterate through each character in stones
  * - For each character in stones, iterate through each character in jewels
- * - If a match is found, increment the count and break the inner loop
+ * - If the character in stones matches any character in jewels, increment the count and break out of the inner loop to avoid unnecessary checks
  * - Time Complexity: O(n*m) where n is the length of stones and m is the length of jewels
  * - Space Complexity: O(1) as we are using a constant amount of space
  *
@@ -39,8 +39,9 @@
  * - Create a set to store the jewels
  * - Iterate through each character in jewels and add it to the set
  * - Iterate through each character in stones
- * - If the character is found in the set, increment the count
- * - Time Complexity: O(1) * O(n) = O(n) where n is the length of stones
+ * - If the character in stones is found in the set, increment the count
+ * - Time Complexity: O(1) * O(n) = O(n) is for iterating through stones and O(1) is for checking if the character is in the set
+ *                    n is the length of stones
  * - Space Complexity: O(1) as we are having at most 52 characters (a-z, A-Z) in the set
  */
 
@@ -48,12 +49,13 @@
 function numJewelsInStones(jewels, stones) {
   let count = 0;
   for (let i = 0; i < stones.length; i++) {
-    if (jewels.includes(stones[i])) ++count; // includes() method checks if a string contains a specified value
+    // includes() method checks if a string contains a specified value
+    if (jewels.includes(stones[i])) ++count;
   }
   return count;
 }
 
-// without using built-in functions
+// language agnostic approach without using built-in functions
 function numJewelInStones(jewels, stones) {
   let count = 0;
   for (let i = 0; i < stones.length; i++) {
@@ -70,7 +72,6 @@ function numJewelInStones(jewels, stones) {
 // using hash set
 function numJewelsInStone(jewels, stones) {
   let jewelSet = new Set();
-
   for (let i = 0; i < jewels.length; i++) {
     jewelSet.add(jewels[i]);
   }

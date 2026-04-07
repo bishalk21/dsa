@@ -1,7 +1,7 @@
 /** Add Two Numbers
  * https://leetcode.com/problems/add-two-numbers/
  *
- * You are given two non-empty linked lists representing two non-negative integers.
+  n are the lengths of the two lists* You are given two non-empty linked lists representing two non-negative integers.
  * The digits are stored in reverse order, and each of their nodes contains a single digit.
  * Add the two numbers and return the sum as a linked list.
  * You may assume the two numbers do not contain any leading zero, except the number 0 itself.
@@ -20,7 +20,7 @@
  *   c. Create a new node with the digit value (sum % 10) and append it to the result list.
  *   d. Move to the next nodes in both lists.
  * 4. Return the next node of the dummy node, which is the head of the new list.
- * 5. Time Complexity: O(max(m, n)), where m and n are the lengths of the two lists
+ * 5. Time Complexity: O(max(m, n)), where m and
  * 6. Space Complexity: O(max(m, n)), for the new list.
  * 7. This solution handles cases where the lists are of different lengths and where there is a carry left after processing both lists.
  */
@@ -41,10 +41,8 @@ function addTwoNumbers(l1, l2) {
     let newNode = new ListNode(digit);
     dummyNode.next = newNode;
     dummyNode = dummyNode.next;
-
     l1 = l1 && l1.next;
     l2 = l2 && l2.next;
   }
-
   return dummyHead.next;
 }

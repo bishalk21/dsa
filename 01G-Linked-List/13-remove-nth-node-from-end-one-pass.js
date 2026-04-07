@@ -53,3 +53,19 @@ function removeNthFromEnd(head, n) {
   second.next = second.next.next;
   return sentinel.next;
 }
+
+function removeNthFromEnd(head, n) {
+  let sentinel = new ListNode(0);
+  sentinel.next = head;
+  let first = head;
+  for (let i = 0; i < n; i++) {
+    first = first.next;
+  }
+  let second = sentinel;
+  while (first) {
+    first = first.next;
+    second = second.next;
+  }
+  second.next = second.next.next;
+  return sentinel.next;
+}

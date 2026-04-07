@@ -37,6 +37,10 @@
 // std means standard library functions
 using namespace std;  
 
+
+
+
+
 class Solution {
     public:
     // function to check if the array is trionic 
@@ -129,3 +133,4 @@ bool isStrictlyDecreasing(const vector<int>& nums, int start, int end) {
 //         return true;
 //     }
 // }
+

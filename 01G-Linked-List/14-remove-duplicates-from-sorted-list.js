@@ -13,7 +13,8 @@
  * Input: head = [1,1,2,3,3]
  * Output: [1,2,3]
  *
- * Algorithm Approach: Iterative
+ * Algorithm pattern: Pointer/Traversal
+ * - Since the list is sorted, duplicates will be adjacent to each other.
  * - Use a pointer to traverse the list.
  * - Compare the current node's value with the next node's value.
  * - If they are the same, skip the next node by adjusting the pointers.
@@ -32,15 +33,12 @@ function ListNode(val, next) {
 }
 
 function deleteDuplicates(head) {
-  // pointer to traverse the list
   let current = head;
 
   while (current && current.next) {
     if (current.val === current.next.val) {
-      // Skip the next node as it's a duplicate
       current.next = current.next.next;
     } else {
-      // Move to the next node
       current = current.next;
     }
   }

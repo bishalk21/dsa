@@ -33,12 +33,14 @@
  *    - the count is the length of the last word
  * 3. return the count
  * - Time complexity: O(n)
- * - Space complexity: O(n), extra space used while splitting the sentence into an array of words
+ * - Space complexity: O(1), since we are using only a few variables to keep track of the count and the position in the string
  *
  * Algorithm 3: Without using Built-in functions - single loop
- * 1. Traverse from the backwards
+ * 1. Start from the end of the string
  * 2. Skip all the trailing spaces at the end of the string
- * 3. if we hit a non-space character, start counting until we hit a space or the start of the string
+ * 3. Once we find a non-space character, start counting the characters of the last word
+ * 4. If we hit a space after counting, we can stop and return the count
+ * 5. If we reach the beginning of the string, we can also stop and return the count
  * 4. return the count
  * - Time complexity: O(n)
  * - Space complexity: O(1)
@@ -61,22 +63,19 @@ function lengthOfLastWord(s) {
     // } else {
     //   break;
     // }
-
-    if (s[n] != " ") break;
+    if (s[n] !== " ") break;
     --n;
   }
-
   // n is the position of the last character of the last word
   // count the characters until we hit a space or the start of the string
   let count = 0;
   while (n >= 0) {
-    // if (s[n] != " ") {
+    // if (s[n] !== " ") {
     //   --n;
     //   ++count;
     // } else {
     //   break;
     // }
-
     if (s[n] === " ") break;
     --n;
     ++count;
@@ -88,11 +87,10 @@ function lengthOfLastWord(s) {
 function lengthOfLastWordSingleLoop(s) {
   let n = s.length - 1; // last index
   let count = 0;
-
   // skip trailing spaces
   while (n >= 0) {
     // if found a non-space character, start counting
-    if (s[n] != " ") {
+    if (s[n] !== " ") {
       ++count;
     }
     // if found a space after counting, we can stop

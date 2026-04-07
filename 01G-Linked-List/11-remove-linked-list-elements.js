@@ -9,8 +9,42 @@
  * Input: head = [1,2,6,3,4,5,6], val = 6
  * Output: [1,2,3,4,5]
  *
+ * Example 2:
+ * Input: head = [], val = 1
+ * Output: []
+ *
+ * Example 3:
+ * Input: head = [7,7,7,7], val = 7
+ * Output: []
+ *
+ * Constraints:
+ * - The number of nodes in the list is in the range [0, 10^4].
+ * - 1 <= Node.val <= 50
+ * - 0 <= val <= 50
+ *
  * Algorithm Approach: Iterative
+ *
+ * keeping track of previous node is necessary as
+ * we need to adjust the pointers to remove nodes.
+ *
+ * What is a dummy node (Sentinel)?
+ * A dummy node, also known as a sentinel node,
+ * is a placeholder node that is used to simplify edge cases in linked list operations.
+ * It does not hold any meaningful data and
+ * is typically placed at the beginning of the list.
+ * The dummy node allows us to avoid special handling for cases
+ * where the head of the list needs to be removed,
+ * as it provides a consistent starting point for traversal and manipulation of the list.
+ *
  * - Use a dummy node (Sentinel) to simplify the removal process.
+ * - sentinel node helps us delete node from the starting of the list
+ *   without worrying about edge cases.
+ * - sentinel node keeps check on the next node and
+ *   if it needs to be removed, we can easily adjust the pointers
+ *   without worrying about edge cases.
+ *
+ *
+ * - add a dummy node at the beginning of the list, pointing to the head.
  * - Traverse the list
  * - If the current node's value is equal to val, adjust the pointers to skip this node.
  * - Otherwise, move to the next node.
@@ -32,17 +66,13 @@ function removeElements(head, val) {
   // sentinel node to handle edge cases
   let sentinel = new ListNode(0);
   sentinel.next = head;
-
-  let prev = sentinel; // Pointer to the previous node
+  let prev = sentinel;
   while (prev && prev.next) {
     if (prev.next.val === val) {
-      // Node needs to be removed
-      prev.next = prev.next.next; // Skip the node
+      prev.next = prev.next.next;
     } else {
-      // Move to the next node
       prev = prev.next;
     }
   }
-  // Return the new head, which is the next of the sentinel node
   return sentinel.next;
 }
