@@ -37,22 +37,26 @@
  */
 
 function reverseStr(s, k) {
-  // Convert string to array of characters
-  let arrStr = s.split("");
-
-  // loop through the array in increments of 2k
-  for (let x = 0; x < arrStr.length; x = x + 2 * k) {
-    let n = k; // number of characters to reverse i.e., k = 2
-    let mid = Math.floor(n / 2); // mid point for swapping
-
-    // Reverse the first k characters in place
+  s = s.split("");
+  let n = s.length;
+  // jump 2k steps
+  for (let x = 0; x < n; x = x + 2 * k) {
+    // reverse the first k chars starting from x
+    let mid = Math.floor(k / 2);
     for (let i = 0; i < mid; i++) {
-      // Swap characters at positions (x + i) and (x + n - 1 - i)
-      let temp = arrStr[x + i];
-      arrStr[x + i] = arrStr[x + n - 1 - i];
-      arrStr[x + n - 1 - i] = temp;
+      let temp = s[x + i];
+      s[x + i] = s[x + k - i - 1];
+      s[x + k - i - 1] = temp;
     }
   }
-  // Join the array back into a string and return
-  return arrStr.join("");
+  // reverse a string
+  // let n = s.length
+  // let mid = Math.floor(n / 2)
+  // for (let i = 0; i < mid; i++) {
+  //     // swap(s[i], s[n - 1 - i])
+  //     let temp = s[i]
+  //     s[i] = s[n - 1 - i]
+  //     s[n - 1 - i] = temp
+  // }
+  return s.join("");
 }
