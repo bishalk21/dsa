@@ -36,7 +36,6 @@
 function groupAnagrams(strs) {
   // map to hold sorted string as key and list of anagrams as value
   let map = {};
-
   for (let i = 0; i < strs.length; i++) {
     // Sort the string to create a key
     let sortedStr = strs[i].split("").sort().join("");
@@ -89,4 +88,24 @@ function groupAnagramsHashing(strs) {
   }
   // Return the values of the map as the result
   return [...Object.values(map)];
+}
+
+function groupAnagramsHash(strs) {
+  let map = new Map();
+  for (let i = 0; i < strs.length; i++) {
+    let freqArr = new Array(26).fill(0);
+    let str = strs[i];
+    for (let j = 0; j < str.length; j++) {
+      let index = str.charCodeAt(j) - "a".charCodeAt(0);
+      freqArr[index]++;
+    }
+    let key = freqArr.join("#");
+    if (!map.has(key)) {
+      map.set(key, [str]);
+    } else {
+      map.get(key).push(str);
+    }
+  }
+  // return Array.from(map.values());
+  return [...map.values()];
 }

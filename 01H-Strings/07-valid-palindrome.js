@@ -53,7 +53,6 @@ function isPalindrome(s) {
   s = s.toLowerCase();
   let left = 0;
   let right = s.length - 1;
-
   // two pointers check if the length is a palindromes
   while (left < right) {
     // if left is not alphanumeric, move left pointer to the right
@@ -77,6 +76,19 @@ function isPalindrome(s) {
   return true;
 }
 
+/** Algorithm: extra space - using built-in functions - regex or charCodeAt
+ * 1. Convert the string to lowercase.
+ * 2. filter out the string to get only alphanumeric characters
+ *    - using regex to check if a character is alphanumeric
+ *    - using charCodeAt to check if a character is alphanumeric
+ * 3. reverse the filtered string
+ * 4. compare the filtered string with the reversed string
+ * 5. return true if they are the same, else return false
+ * 6. Time Complexity: O(n), where n is the length of the string.
+ * 7. Space Complexity: O(n) for the filtered string and reversed string.
+ */
+
+// using built-in functions - regex
 function isValidPalindrome(s) {
   // filter out non-alphanumeric characters and convert to lowercase
   s = s.toLowerCase();
@@ -86,7 +98,6 @@ function isValidPalindrome(s) {
   // i - case insensitive
   // g - global
   // m - multiline
-
   for (let i = 0; i < s.length; i++) {
     if (s[i].match(/[a-z0-9]/i)) {
       // found the first alphanumeric character from the start
@@ -97,6 +108,38 @@ function isValidPalindrome(s) {
   return filteredStr === reversedStr;
 }
 
+function isValidPalindrome(s) {
+  // filter out non-alphanumeric characters and convert to lowercase
+  s = s.toLowerCase();
+  let filteredStr = "";
+  let reversedStr = "";
+  // using regex to check if a character is alphanumeric
+  // /[a-z0-9]/i
+  // i - case insensitive
+  // g - global
+  // m - multiline
+  for (let i = 0; i < s.length; i++) {
+    // filtering the string means
+    // we are only keeping alphanumeric characters
+    // and we are ignoring non-alphanumeric characters
+
+    if (s[i].match(/[a-z0-9]/i)) {
+      // found the first alphanumeric character from the start
+      filteredStr = filteredStr + s[i];
+      // we can append the character to the reversed string
+      // at the same time of filtering instead of using built-in reverse method later,
+      // so we don't need to reverse the filtered string later, which saves time and space
+      reversedStr = s[i] + reversedStr;
+    }
+  }
+  // let reversedStr = filteredStr.split("").reverse().join("");
+  return filteredStr === reversedStr;
+}
+
+//
+// using charCodeAt to check if a character is alphanumeric
+// always using built-in functions is not a good idea, as it may not be efficient and may not work in all cases
+// to reverse a string, we can use two pointers approach to reverse the string in-place without using extra space
 function isPalindromeValid(s) {
   // filter out non-alphanumeric characters and convert to lowercase
   s = s.toLowerCase();

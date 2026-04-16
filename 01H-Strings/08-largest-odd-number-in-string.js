@@ -19,10 +19,10 @@
  * Explanation: There are no odd numbers in "4206".
  *
  * Algorithm:
- * 1. Start from the end of the string and move backwards.
+ * 1. Iterate through the string from the end to the beginning.
  * 2. Check if the current character is an odd digit (1, 3, 5, 7, 9).
- * 3. If an odd digit is found, return the substring from the start of the string to the current position (inclusive).
- * 4. If no odd digit is found by the time the start of the string is reached, return an empty string.
+ * 3. If it is an odd digit, return the substring from the beginning of the string to the current index (inclusive).
+ * 4. If no odd digit is found after iterating through the entire string, return an empty string "".
  * 5. Time Complexity: O(n), where n is the length of the string.
  * 6. Space Complexity: O(1) if we don't consider the output string, otherwise O(n) for the output string.
  *
@@ -31,15 +31,20 @@
 
 function largestOddNumber(num) {
   let n = num.length - 1;
-  //   while (n >= 0) {
-  //     if (Number(num[i]) % 2 === 1) {
-  for (let i = n; i >= 0; i--) {
-    if (parseInt(num[i]) % 2 === 1) {
-      // odd number check
+  // for (let i = n; i >= 0; i--) {
+  //   // odd number check
+  //   if (parseInt(num[i]) % 2 === 1) {
+  //     // return substring from start to i+1
+  //     return num.substring(0, i + 1);
+  //   }
+  // }
+  // return ""; // no odd number found
 
-      return num.substring(0, i + 1); // return substring from start to i+1
+  while (n >= 0) {
+    if (Number(num[n]) % 2 === 1) {
+      return num.substring(0, n + 1);
     }
-    // n--;
+    n--;
   }
-  return ""; // no odd number found
+  return "";
 }

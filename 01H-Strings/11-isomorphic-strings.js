@@ -34,7 +34,6 @@ function isIsomorphic(s, t) {
   // create two maps to store character mappings
   let mapStoT = {};
   let mapTtoS = {};
-
   // iterate through characters of both strings
   // store mapping in both maps
   for (let i = 0; i < s.length; i++) {

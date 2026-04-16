@@ -53,13 +53,11 @@ function isAnagram(s, t) {
 }
 
 function isAnagramMap(s, t) {
-  // 1. If the lengths of the strings are different, return false
+  // 1. If the lengths of strings are different
   if (s.length !== t.length) return false;
-
-  // 2. Create a frequency map for the first string
+  // 2. Create a freq map for the first str
   let map = {};
-
-  // populate the map with the frequency of each character in string s
+  // populate map with freq of each char in str s
   for (let i = 0; i < s.length; i++) {
     if (!map[s[i]]) {
       map[s[i]] = 1;
@@ -67,14 +65,15 @@ function isAnagramMap(s, t) {
       map[s[i]]++;
     }
   }
-
-  // 3. Iterate through the second string and decrement the frequency map
+  // 3. Iterate through 2nd str and decrement freq map
   for (let i = 0; i < t.length; i++) {
     if (!map[t[i]] || map[t[i]] < 0) {
-      return false; // 4. If any character's frequency goes below zero, return false
+      // 4. If any char's freq goes below zero
+      return false;
     } else {
       map[t[i]]--;
     }
   }
-  return true; // 5. If all characters match, return true
+  // 5. If all chars match
+  return true;
 }
