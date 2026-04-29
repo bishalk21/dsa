@@ -48,6 +48,21 @@
  * empty(); // should return true
  */
 
+/** Algorithm:
+ * 1. For push operation, simply enqueue the element to the first queue (q1).
+ * 2. For pop operation, we need to remove the last element added to the stack, which is at the back of q1. To achieve this, we can move all elements except the last one from q1 to q2. Then, we can dequeue the last element from q1 and return it. Finally, we swap the names of q1 and q2 to prepare for the next operations.
+ * 3. For top operation, we can follow the same process as pop, but instead of dequeuing the last element from q1, we can peek at it and return its value. We still need to move all elements except the last one from q1 to q2 and swap the names of q1 and q2 afterward.
+ * 4. For empty operation, we can simply check if q1 is empty.
+ *
+ * Time Complexity:
+ * - push: O(1) since we are just enqueuing an element to q1.
+ * - pop: O(n) since we need to move n-1 elements from q1 to q2 and then dequeue the last element from q1.
+ * - top: O(n) since we need to move n-1 elements from q1 to q2 and then peek at the last element from q1.
+ * - empty: O(1) since we are just checking if q1 is empty.
+ * Space Complexity: O(n) since we are using two queues to store the elements of the stack.
+ * Note: The space complexity is O(n) because in the worst case, all elements of the stack could be in one of the queues (either q1 or q2) at any given time.
+ */
+
 var MyStack = function () {
   this.q1 = [];
   this.q2 = [];

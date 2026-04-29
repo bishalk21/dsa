@@ -13,6 +13,14 @@
  *
  */
 
+// using built-in methods
+function isPalindrome(num) {
+  let str = num.toString(); // convert number to string
+  let reversedStr = str.split("").reverse().join("");
+
+  return str === reversedStr; // check if original string is equal to reversed string
+}
+
 // hence, num == reverse(num)
 
 // Algorithm
@@ -131,3 +139,10 @@ function isIntegerPalindrome(x) {
 //     return reversed == original;
 //   }
 // }
+
+// java solution
+/** Algorithm:
+ * 1. Check if the input integer is negative. If it is, return false since negative numbers cannot be palindromes.
+ * 2. Initialize a variable to store the reversed number.
+ * 3. Use a while loop to reverse the digits of the integer.
+ */

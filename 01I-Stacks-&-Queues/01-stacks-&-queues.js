@@ -18,6 +18,7 @@
  *   - call center systems (calls are answered in the order they are received)
  *   - breadth-first search (BFS) in graphs and trees
  *   - any queue management system
+ *   - queues in general (e.g., waiting lines, customer service)
  *
  * 2. Stack: LIFO (Last In First Out)
  *    - Push: Add an element to the top of the stack

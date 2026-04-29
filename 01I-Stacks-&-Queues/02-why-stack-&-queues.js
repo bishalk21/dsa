@@ -31,8 +31,10 @@
  *
  * both stacks and queues are implemented using arrays or linked lists in code.
  * Since we have arrays and linked lists available, why do we need stacks and queues?
- * - Stacks and Queues provide a more restricted (top only for stacks, front and back for queues) and controlled way to access and manipulate data.
- * - They enforce specific access patterns (LIFO for stacks, FIFO for queues) that are essential for certain algorithms and applications.
+ * - Stacks and Queues provide a more restricted (top only for stacks, front and back for queues) and
+ *   controlled way to access and manipulate data.
+ * - They enforce specific access patterns (LIFO for stacks, FIFO for queues) that are essential for certain algorithms
+ *   and applications.
  * - They provide a higher level of abstraction, making it easier to reason about data management in specific scenarios.
  * - They cannot modify data in the middle or provide random access, which helps maintain order and integrity of data based on the required access pattern.
  * - Stack == Array with restricted access (only top)

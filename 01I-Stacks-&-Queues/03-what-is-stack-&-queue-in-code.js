@@ -10,6 +10,8 @@
  *     - pop(): Remove and return the top element of the stack.
  *     - peek(): View the top element without removing it.
  *     - isEmpty(): Check if the stack is empty.
+ *   - Time Complexity: O(1) for push and pop operations.
+ *   - Space Complexity: O(n) where n is the number of elements in the stack.
  * - Queue:
  *   - Implemented using arrays or linked lists.
  *   - its restricted access nature means elements can only be added at the back and removed from the front of the queue.
@@ -18,6 +20,8 @@
  *     - dequeue(): Remove and return the front element of the queue.
  *     - front(): View the front element without removing it.
  *     - isEmpty(): Check if the queue is empty.
+ *   - Time Complexity: O(1) for enqueue and dequeue operations.
+ *   - Space Complexity: O(n) where n is the number of elements in the queue.
  */
 
 let stack = []; // Using an array to implement a stack
