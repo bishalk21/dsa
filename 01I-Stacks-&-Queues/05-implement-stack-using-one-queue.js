@@ -30,6 +30,22 @@
  * myStack.empty(); // return False
  */
 
+/** Algorithm:
+ * 1. For push operation, simply add the element to the queue.
+ * 2. For pop operation, move all elements except the last one to the back of the queue,
+ *    then remove and return the last element.
+ * 3. For top operation, move all elements except the last one to the back of the queue,
+ *    then return the last element without removing it.
+ * 4. For empty operation, check if the queue is empty.
+ * Time complexity:
+ * - push: O(n) since we need to move all elements to the back of the queue after adding the new element.
+ * - pop: O(1) since we are just removing the last element from the queue.
+ * - top: O(1) since we are just peeking at the last element from the queue.
+ * - empty: O(1) since we are just checking if the queue is empty.
+ * Space complexity: O(n) since we are using a queue to store the elements of the stack.
+ * Note: We can optimize the push operation to O(1) by adding the new element to the back of the queue and then moving all elements except the new element to the back of the queue. This way, the last element in the queue will always be the top of the stack.
+ */
+
 var MyStack = function () {
   this.q = [];
 };
