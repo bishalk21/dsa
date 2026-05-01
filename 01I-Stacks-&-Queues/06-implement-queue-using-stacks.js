@@ -39,6 +39,20 @@
  * empty(); // should return true
  */
 
+/** Algorithm:
+ * 1. We can use two stacks to implement the queue. Let's call the two stacks s1 and s2.
+ * 2. For the push operation, we can simply push the element onto stack s1.
+ * 3. For the pop operation, if stack s2 is empty, we can move all elements from stack s1 to stack s2 by popping from s1 and pushing onto s2. Then we can pop the top element from stack s2, which will be the front element of the queue.
+ * 4. For the peek operation, if stack s2 is empty, we can move all elements from stack s1 to stack s2 as described above. Then we can return the top element of stack s2 without popping it.
+ * 5. For the empty operation, we can check if both stacks s1 and s2 are empty.
+ * Time complexity:
+ * - push: O(1) since we are just pushing an element onto stack s1.
+ * - pop: O(1) amortized because each element is moved between the two stacks at most once. In the worst case, when we need to move elements from s1 to s2, it takes O(n) time, but this happens only once for each element.
+ * - peek: O(1) amortized for the same reason as pop.
+ * - empty: O(1) since we are just checking if both stacks are empty.
+ * Space complexity: O(n) since we are using two stacks to store the elements of the queue.
+ */
+
 var MyQueue = function () {
   this.s1 = [];
   this.s2 = [];
